@@ -52,7 +52,7 @@ export interface FullCreditAnalysisResponse {
   income_assessment?: IncomeAssessment;
   decision?: string;
   commentary?: string;
-
+  cashplus_card?: FeatureContributions; // CashPlus Scorecard with point values
   liability_scorecard?: LiabilityScorecard | null;
   counter_offer_options?: {
     offers?: CounterOfferOption[];

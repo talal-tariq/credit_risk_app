@@ -51,7 +51,10 @@ function getRiskDecisionFromScore(score: number): {
 
 function extractModelFields(responseData: any) {
   const modelExplanationObj = responseData?.model_explanation;
-  const cashPlusCard = responseData?.casshplus_card;
+  const cashPlusCard = responseData?.cashplus_card;
+
+  console.log('Cash Plus Card:', cashPlusCard);
+  console.log('Model Explanation:', modelExplanationObj);
 
   const riskScore =
     modelExplanationObj?.Y ??
@@ -70,7 +73,9 @@ function extractModelFields(responseData: any) {
     modelExplanationObj?.feature_contributions ??
     null;
 
-  const intercept = featureContribs?.intercept ?? null;
+  console.log('Feature Contributions being used:', featureContribs);
+
+  const intercept = modelExplanationObj?.intercept ?? null;
 
   const transactionText =
     responseData?.transaction_analysis ??
@@ -787,8 +792,8 @@ export function LoanForm() {
               control={control}
               render={({ field }) => (
                 <select {...field} className={inputClass(!!errors.MEDIAN_BALANCE)}>
-                  <option value="">Select balance range</option>
-                  <option value="Not_Available">Not_Available</option>
+                  <option value="">Select Balance Range</option>
+                  <option value="Not_Available">Not Available</option>
                   <option value="0-1K">0-1K</option>
                   <option value="1K-5K">1K-5K</option>
                   <option value="5K-15K">5K-15K</option>
@@ -807,8 +812,8 @@ export function LoanForm() {
               render={({ field }) => (
                 <select {...field} className={inputClass(!!errors.ECIB_MONTHS_DIFF)}>
                   <option value="">Select value</option>
-                  <option value="New_To_Industry">New_To_Industry</option>
-                  <option value="Existing_To_Industry">Existing_To_Industry</option>
+                  <option value="New_To_Industry">New To Industry</option>
+                  <option value="Existing_To_Industry">Existing To Industry</option>
                 </select>
               )}
             />
